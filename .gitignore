@@ -1,0 +1,21 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# 临时文件
+*.tmp
+*.log
+*.bak
+*.swp
+*~
+__MACOSX/
+
+# 编辑器
+.idea/
+.vscode/
+
+# dist 里只保留 .skill 包，打包过程中的中间产物都忽略
+dist/*
+!dist/*.skill
