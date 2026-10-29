@@ -74,7 +74,8 @@ Steam 显示苹果标志或官方提供 macOS 版本。简单列出即可，用�
 3. **Whisky 社区** — 免费方案的兼容情况
 4. **PCGamingWiki** — 启动器、反作弊、Mod、存档路径、图形 API
 5. **ProtonDB** — 间接参考（Linux 可运行不等于 Mac 可运行，但能提示反作弊和图形 API 信息）
-6. **GitHub / Reddit / Bilibili / YouTube** — 近期玩家实测，尤其关注具体机型上的实际帧率和体验
+6. **macgamers.org** — CrossOver 实测报告（机型、帧率、安装方式）
+7. **GitHub / Reddit / Bilibili / YouTube** — 近期玩家实测，尤其关注具体机型上的实际帧率和体验
 
 ## 兼容方案
 
@@ -82,12 +83,22 @@ Steam 显示苹果标志或官方提供 macOS 版本。简单列出即可，用�
 
 | 方案 | 说明 |
 |---|---|
-| Whisky | 基于 Wine 的免费方案，适合大多数 Windows 游戏 |
-| GPTK (Game Porting Toolkit) | Apple 官方工具，底层翻译层 |
+| CrossOver | 本机已装有就直接用（即使显示"试用版"），复用现成工具成本最低 |
+| Whisky | 免费开源，2024 底停止维护，macOS 26+ 不作首选 |
+| GPTK (Game Porting Toolkit) | Apple 官方底层翻译层，需手动配置 |
 | PlayCover | 仅限 iOS/iPadOS 游戏，不用于 Steam Windows 游戏 |
 | 串流 | 用户有 Windows PC 时可用 Steam Remote Play 等，适合反作弊网游 |
+| NW.js 原生 | 见下方「NW.js 游戏专用路线」 |
 
-付费方案（CrossOver、Parallels）仅在用户主动询问时介绍。
+付费方案（Parallels）仅在用户主动询问时介绍。注意：带 Steamworks（steam_api64.dll）的 Windows 游戏需在兼容层内运行已登录的 Steam 客户端；家庭共享游戏同时只能一人启动（Shared library locked = 所有者占用，等空闲即可）。
+
+### NW.js 游戏专用路线（RPG Maker MV/MZ 等）
+
+判断标志：游戏目录有 `www` 文件夹 + `package.json`。这类游戏是网页应用打包成 exe，用 macOS 版 NW.js 直接运行 `www` 目录，不需要 Wine 系方案。
+
+- 必须用 arm64 原生版 NW.js（0.82+）；Intel 旧版走 Rosetta 会约一半概率开机段错误闪退
+- arm64 新版要求 `package.json` 的 `name` 非空，空字符串只会显示欢迎页
+- 存档在 `www/save/`，可直接改 JSON 做数值/解锁修改
 
 ## 兼容效果评估
 
@@ -126,6 +137,8 @@ Rockstar Launcher、Ubisoft Connect、EA App 等额外启动器会影响兼容�
 ### 存档迁移
 
 如果用户提到从 Windows 迁移存档，查 Steam Cloud 支持情况和 PCGamingWiki 存档路径。兼容层内的存档位置与 Windows 不同，需说明。
+
+Steam 库中 language=schinese 的 depot 可用控制台 `download_depot <appid> <depotid>` 单独下载，用于获取官方中文素材或留作原始备份。
 
 ## 相似游戏推荐
 
